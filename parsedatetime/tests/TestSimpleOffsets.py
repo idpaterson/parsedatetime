@@ -147,5 +147,16 @@ class test(unittest.TestCase):
             phrase = '%sfoo' % p
             self.assertTrue(_compareResults(self.cal.parse(phrase, start), (target, 0)), '"%s" is mistakenly parsed as a datetime' % phrase)
 
+        phrases = [
+            '5 minutes ago',
+            'five min ago',
+            '1 week ago',
+            'seven days ago'
+        ]
+
+        for p in phrases:
+            phrase = 'foo%s' % p
+            self.assertTrue(_compareResults(self.cal.parse(phrase, start), (target, 0)), '"%s" is mistakenly parsed as a datetime' % phrase)
+
 if __name__ == "__main__":
     unittest.main()
