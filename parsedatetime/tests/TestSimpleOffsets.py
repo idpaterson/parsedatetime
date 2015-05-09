@@ -123,6 +123,29 @@ class test(unittest.TestCase):
 
         self.assertTrue(_compareResults(self.cal.parse('today', start), (target, 1)))
 
+    def testWordBoundaries(self):
+        # Ensure that keywords appearing at the start of a word are not parsed
+        # as if they were standalone keywords. For example, "10 dogs" should
+        # not be interpreted the same as "10 d"
+        start  = datetime.datetime(self.yr, self.mth, self.dy, self.hr, self.mn, self.sec).timetuple()
+        target = datetime.datetime.now().timetuple()
+
+        phrases = [
+            '5 minutes',
+            '5 min',
+            '5m',
+            'five minutes',
+            'five min',
+            '1 week',
+            '7 days',
+            'seven days'
+        ]
+
+        for p in phrases:
+            phrase = 'foo%s' % p
+            self.assertTrue(_compareResults(self.cal.parse(phrase, start), (target, 0)), '"%s" is mistakenly parsed as a datetime' % phrase)
+            phrase = '%sfoo' % p
+            self.assertTrue(_compareResults(self.cal.parse(phrase, start), (target, 0)), '"%s" is mistakenly parsed as a datetime' % phrase)
 
 if __name__ == "__main__":
     unittest.main()

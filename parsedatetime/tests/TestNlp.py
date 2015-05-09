@@ -72,3 +72,17 @@ class test(unittest.TestCase):
         self.assertTrue(target[0][4] == "At '8PM on August 5th")
         self.assertTrue(target[1][4] == "next Friday at 9PM")
         self.assertTrue(target[2][4] == "in '5 minutes")
+
+
+    def testWordBoundaries(self):
+        # Ensure that keywords appearing at the start of a word are not parsed
+        # as if they were standalone keywords. For example, "10 dogs" should
+        # not be interpreted the same as "10 d"
+        start  = datetime.datetime(self.yr, self.mth, self.dy, self.hr, self.mn, self.sec).timetuple()
+        target = None
+
+        # negative testing - no matches should return None
+        self.assertTrue(_compareResults(self.cal.nlp("I'm so excited!! At 8amfoo on fooAugust 5th i'm going to fly to Florida"
+                                                     ". Then next Fridayfoo at foo9PM i'm going to Dog n Bone! And in foo5 "
+                                                     "minutes I'm going to eat some food!", start), target))
+
