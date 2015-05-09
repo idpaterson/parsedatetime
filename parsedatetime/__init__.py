@@ -2418,8 +2418,8 @@ class Constants(object):
         self.RE_SPECIAL   = r'(?P<special>^[{specials}]+)\s+'.format(**self.locale.re_values)
 
         self.RE_UNITS     = r'''(?P<qty>
-                                    (-?
-                                        (\b
+                                    \b(-?
+                                        (
                                             ({numbers})\b|\d+
                                         )\s*
                                         (?P<units>
