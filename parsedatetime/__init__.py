@@ -2413,7 +2413,7 @@ class Constants(object):
                                 )
                                 (\s|$|[^0-9a-zA-Z])'''.format(**self.locale.re_values)
 
-        self.RE_NUMBER    = r'({numbers}|\d+)'.format(**self.locale.re_values)
+        self.RE_NUMBER    = r'\b({numbers}|\d+)'.format(**self.locale.re_values)
 
         self.RE_SPECIAL   = r'(?P<special>^[{specials}]+)\s+'.format(**self.locale.re_values)
 
