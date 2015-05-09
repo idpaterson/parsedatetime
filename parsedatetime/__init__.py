@@ -2467,7 +2467,7 @@ class Constants(object):
                                     )
                                 )?'''.format(**self.locale.re_values)
 
-        self.RE_TIMEHMS2  = r'''(?P<hours>
+        self.RE_TIMEHMS2  = r'''\b(?P<hours>
                                     (\d\d?)
                                 )
                                 (
